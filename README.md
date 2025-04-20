@@ -1,4 +1,3 @@
-# wordle puzzle programs
-~gotta get to this soon~
+# nytimes games puzzle programs
 
-***WIP***, started working.
+Programs to brute force NY Times puzzles.
