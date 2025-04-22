@@ -57,14 +57,77 @@
       <h2>Wordle Clues</h2>
       <div class="wordle-container">
         <div class="wordle-grid">
-          <div class="wordle-row">
-            <div class="wordle-box" onclick="changeColor(this)"></div>
-            <div class="wordle-box" onclick="changeColor(this)"></div>
-            <div class="wordle-box" onclick="changeColor(this)"></div>
-            <div class="wordle-box" onclick="changeColor(this)"></div>
-            <div class="wordle-box" onclick="changeColor(this)"></div>
+          <!-- Row 1 -->
+          <div class="wordle-row-container">
+            <div class="wordle-row">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+            </div>
+            <button class="submit-button">Submit</button>
           </div>
-          <!-- Other wordle rows go here -->
+          
+          <!-- Row 2 -->
+          <div class="wordle-row-container">
+            <div class="wordle-row">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+            </div>
+            <button class="submit-button">Submit</button>
+          </div>
+          
+          <!-- Row 3 -->
+          <div class="wordle-row-container">
+            <div class="wordle-row">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+            </div>
+            <button class="submit-button">Submit</button>
+          </div>
+          
+          <!-- Row 4 -->
+          <div class="wordle-row-container">
+            <div class="wordle-row">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+            </div>
+            <button class="submit-button">Submit</button>
+          </div>
+          
+          <!-- Row 5 -->
+          <div class="wordle-row-container">
+            <div class="wordle-row">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+            </div>
+            <button class="submit-button">Submit</button>
+          </div>
+          
+          <!-- Row 6 -->
+          <div class="wordle-row-container">
+            <div class="wordle-row">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+              <input type="text" class="wordle-box" maxlength="1" onclick="changeColor(this)">
+            </div>
+            <button class="submit-button">Submit</button>
+          </div>
         </div>
       </div>
     </div>
@@ -94,10 +157,29 @@
     let currentState = 0;
 
     function changeColor(box) {
+      // Prevent changing color if input is focused (we'll use right-click for color changing)
+      event.preventDefault();
       box.classList.remove(colorState[currentState]);
       currentState = (currentState + 1) % colorState.length;
       box.classList.add(colorState[currentState]);
     }
+
+    // Add right-click functionality for color changing
+    document.querySelectorAll('.wordle-box').forEach(box => {
+      box.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        changeColor(this);
+      });
+    });
+
+    // Auto-focus next input when a letter is entered
+    document.querySelectorAll('.wordle-box').forEach((box, index, boxes) => {
+      box.addEventListener('input', function() {
+        if (this.value.length === 1 && index < boxes.length - 1) {
+          boxes[index + 1].focus();
+        }
+      });
+    });
   </script>
 </body>
 </html>
